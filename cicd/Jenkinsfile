@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    nodejs "Node14.19.0"
+    nodejs "Node16.14.2"
   }
   environment {
     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
