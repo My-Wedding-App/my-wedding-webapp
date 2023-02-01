@@ -1,0 +1,63 @@
+pipeline {
+  agent any
+  tools {
+    nodejs "Node14.19.0"
+  }
+  environment {
+    FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
+    GIT_BRANCH = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length()).trim()
+  }
+  stages {
+    stage('Checkout Scm') {
+      steps {
+        git(url: 'https://github.com/My-Wedding-App/my-wedding-webapp.git', branch: "${GIT_BRANCH}")
+      }
+    }
+
+    stage('Login to Docker hub') {
+      steps {
+        sh '''
+        echo "=== Docker Hub login ==="
+
+        echo "=== Docker Hub login Success ==="
+        '''
+      }
+    }
+
+    stage('Build My Wedding Web App'){
+      steps {        
+        sh '''echo "=== My Wedding Web App Build ==="'''
+        sh '''yarn install'''
+        sh '''yarn build'''
+        sh '''bash docker-build-then-push-image.sh'''
+        sh '''echo "=== My Wedding Web App Build Success ==="
+        '''
+      }
+    }
+    
+    stage('Deploy My Wedding Web App to dev'){
+      when { expression { env.GIT_BRANCH == 'dev'} }
+      steps {
+        sh '''
+        echo "=== Deploy My Wedding Web AppMy Wedding Web App Azure Conatiner App (Dev) ==="
+        
+        echo "=== Deploy My Wedding Web AppMy Wedding Web App Azure Conatiner App (Dev) Success==="
+        '''
+      }
+    }
+
+    stage('Deploy My Wedding Web AppMy Wedding Web App to production'){
+      when { expression { env.GIT_BRANCH == 'master'} }
+      steps {
+        sh '''
+        echo "=== Deploy My Wedding Web App Azure Conatiner App (Production) ==="
+
+        echo "=== Deploy My Wedding Web App Azure Conatiner App (Production) Success==="
+        '''
+      }
+    }
+  }
+  options {
+    buildDiscarder(logRotator(daysToKeepStr: '2', numToKeepStr: '2'))
+  }
+}
