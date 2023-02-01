@@ -2,13 +2,19 @@
   "name": "my-wedding-webapp",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "webpack serve --open",
+    "build": "webpack --config webpack.config.js",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "bootstrap": "^5.2.3",
     "react": "^18.2.0",
-    "react-scripts": "5.0.1",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "5.3.0",
+    "react-scripts": "5.0.1",
     "sass": "^1.54.8",
     "web-vitals": "^2.1.4"
   },
@@ -18,13 +24,17 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
-    "typescript": "^4.7.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "json-loader": "^0.5.7",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.8.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "eslintConfig": {
     "extends": [
