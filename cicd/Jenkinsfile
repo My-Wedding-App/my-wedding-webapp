@@ -4,6 +4,7 @@ pipeline {
     nodejs "Node16.14.2"
   }
   environment {
+    DOCKER_HUB_TOKEN = credentials('docker-hub-token')
     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
     GIT_BRANCH = FULL_PATH_BRANCH.substring(FULL_PATH_BRANCH.lastIndexOf('/') + 1, FULL_PATH_BRANCH.length()).trim()
   }
@@ -18,7 +19,7 @@ pipeline {
       steps {
         sh '''
         echo "=== Docker Hub login ==="
-
+        echo $DOCKER_HUB_TOKEN | docker login -u asithalakshan97 --password-stdin
         echo "=== Docker Hub login Success ==="
         '''
       }
