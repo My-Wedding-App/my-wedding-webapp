@@ -3,6 +3,9 @@ pipeline {
   tools {
     nodejs "Node16.14.2"
   }
+  options { 
+    disableConcurrentBuilds()
+  }
   environment {
     DOCKER_HUB_TOKEN = credentials('docker-hub-token')
     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
@@ -41,7 +44,7 @@ pipeline {
       steps {
         sh '''
         echo "=== Deploy My Wedding Web App Azure Conatiner App (Dev) ==="
-        
+        ansible-playbook -i ansible-hosts ansible-deploy-playbook.yml --key-file "~/.ssh/cicd" -v
         echo "=== Deploy My Wedding Web App Azure Conatiner App (Dev) Success==="
         '''
       }

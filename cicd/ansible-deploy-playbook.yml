@@ -1,0 +1,11 @@
+---
+- name: Connect to My Wedding deployment server
+  hosts: "web"
+  remote_user: ubuntu
+
+  tasks:
+  - name: "Docker hub login"
+    command: docker ps
+
+  - name: "Host test" 
+    command: "pwd"
