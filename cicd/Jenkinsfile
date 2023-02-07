@@ -3,9 +3,6 @@ pipeline {
   tools {
     nodejs "Node16.14.2"
   }
-  options { 
-    disableConcurrentBuilds()
-  }
   environment {
     DOCKER_HUB_TOKEN = credentials('docker-hub-token')
     FULL_PATH_BRANCH = "${sh(script:'git name-rev --name-only HEAD', returnStdout: true)}"
@@ -62,6 +59,7 @@ pipeline {
     }
   }
   options {
+    disableConcurrentBuilds()
     buildDiscarder(logRotator(daysToKeepStr: '2', numToKeepStr: '2'))
   }
 }
