@@ -41,7 +41,7 @@ pipeline {
       steps {
         sh '''
         echo "=== Deploy My Wedding Web App Azure Conatiner App (Dev) ==="
-        ansible-playbook -i ansible-hosts ansible-deploy-playbook.yml --key-file "~/.ssh/cicd" -v
+        ansible-playbook -i ./cicd/ansible-hosts ./cicd/ansible-deploy-playbook.yml --key-file "~/.ssh/cicd" -v
         echo "=== Deploy My Wedding Web App Azure Conatiner App (Dev) Success==="
         '''
       }

@@ -1,11 +1,24 @@
 ---
 - name: Connect to My Wedding deployment server
-  hosts: "web"
+  hosts: "{{ my_wedding_hosts }}"
   remote_user: ubuntu
 
   tasks:
-  - name: "Docker hub login"
-    command: docker ps
+  - name: "{{ inventory_hostname }}: Docker hub login"
+    command: echo {{ docker_hub_token }} | docker login -u asithalakshan97 --password-stdin
 
-  - name: "Host test" 
-    command: "pwd"
+  - name: "{{ inventory_hostname }}: Pull My Wedding web docker image [{{ image }}]"
+    docker_image:
+      name: "{{ image }}"
+  
+  - name: "{{ inventory_hostname }}: Get the container id [my-wedding-web]" 
+    command: "docker ps -qf name=my-wedding-web"
+    register: command_output
+  
+  - set_fact:
+      container_id: "{{ command_output.stdout }}"
+
+  - name: "{{ inventory_hostname }}: Get existing My Wedding web container info container id: {{ container_id }} name: [my-wedding-web]"
+    docker_container_info:
+      name: "{{container_id}}"
+    register: result
