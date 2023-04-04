@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import { MainPage, InvitationPage } from './views';
+import AdminPage from './views/admin/AdminPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Switch>          
           <Route exact path="/"><InvitationPage /></Route>
           <Route path="/main"><MainPage /></Route>
+          <Route path="/admin"><AdminPage /></Route>
         </Switch>
       </Router>,
     </>

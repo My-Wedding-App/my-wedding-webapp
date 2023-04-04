@@ -1,8 +1,6 @@
 import axios, { AxiosError } from "axios";
-import dotenv from "dotenv";
 
-dotenv.config();
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.API_BASE_URL;
 
 export const getApi = async <T>(path: string, params?: string | Record<string, unknown>): Promise<T> => {
   const url = `${baseUrl}/${path}`;
@@ -21,6 +19,7 @@ export const postApi = async <T>(path: string, data: string | Record<string, unk
   const response = await axios.post(url, data, {
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
       "USER_SECRET": process.env.USER_SECRET ?? ""
     }
   });
