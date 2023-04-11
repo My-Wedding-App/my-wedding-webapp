@@ -12,9 +12,9 @@ function App() {
     <>
       <Router>
         <Switch>          
-          <Route exact path="/"><InvitationPage /></Route>
           <Route path="/main"><MainPage /></Route>
-          <Route path="/admin"><AdminPage /></Route>
+          <Route exact path="/admin"><AdminPage /></Route>
+          <Route exact path="/:guestId" children={<InvitationPage />} />
         </Switch>
       </Router>,
     </>

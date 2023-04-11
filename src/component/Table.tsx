@@ -14,7 +14,7 @@ type Table = {
 const Table = (props: Table) => {
 
   const getInvitationLink = (guest: any) => {
-    return `${process.env.WEB_APP_URL}/invitation/${guest.guestId}`;
+    return `${process.env.WEB_APP_URL}/${guest.guestId}`;
   }
 
   return (

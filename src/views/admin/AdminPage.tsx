@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import Button from "../../component/Button";
 import { getGuestList } from "./action";
-import GuestModal from "./component/GuestModal";
-import GuestTable from "./component/GuestTable";
+import GuestModal from "./components/GuestModal";
+import GuestTable from "./components/GuestTable";
 
 const AdminPage = () => {
   const [loading, setLoading] = useState(true);
