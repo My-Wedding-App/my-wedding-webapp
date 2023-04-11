@@ -11,7 +11,7 @@ export const getApi = async <T>(path: string, params?: string | Record<string, u
       "USER_SECRET": process.env.USER_SECRET ?? ""
     }
   });
-  return response.data;
+  return response.data.length === 1 ? response.data[0] : response.data;
 }
 
 export const postApi = async <T>(path: string, data: string | Record<string, unknown>): Promise<T> => {
